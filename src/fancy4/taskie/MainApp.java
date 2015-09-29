@@ -1,8 +1,13 @@
 package fancy4.taskie;
 
 import java.io.IOException;
+import java.util.Date;
 
+import fancy4.taskie.model.TaskieLogic;
+import fancy4.taskie.view.TaskieOverviewController;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -13,7 +18,24 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-
+    private static ObservableList<String> taskData = FXCollections.observableArrayList();
+    
+    public MainApp() {
+    	String[] data = TaskieLogic.getTask();
+    	taskData.addAll(data);
+   
+    }
+    
+    public static void refresh() {
+    	String[] data = TaskieLogic.getTask2();
+    	taskData.removeAll(taskData);
+    	taskData.addAll(data);
+    }
+    
+    public ObservableList<String> getTaskData() {
+    	return taskData;
+    }
+    
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -55,6 +77,9 @@ public class MainApp extends Application {
 
             // Set person overview into the center of root layout.
             rootLayout.setCenter(taskieOverview);
+            
+            TaskieOverviewController controller = loader.getController();
+            controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
