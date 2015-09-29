@@ -1,41 +1,57 @@
 package fancy4.taskie.model;
+/**
+ * @author Qin_ShiHuang 
+ *
+ */
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class TaskieLogic {
-	static String[] data = {"order pizza","finish PS3","finish 5km","kill bill"};
 	
-	public static String[] getTask() {
-		
-		return data;
-	}
-	
-	public static String[] getTask2() {
-	
-		String[] data = {"ordasdfer pizza","fiasdfnish PS3","fisdgewnish 5km","kiasdxzcll bill"};
-		return data;
-	}
-	
-	public static String[] getTask3() {
-		String[] data = {"pizza","fiasdfnish PS3","fisdgewnish 5km","kiasdxzcll bill"};
-		return data;
-	}
-	public static int getLen() {
-		return data.length;
-	}
-	
-	public static void initialize() {
-		
-	}
-	public static String[] execute(String cmd) {
-		String[] result = {}; 
-		if (cmd == "view all") {
-			result = getTask2();
-		} else if (cmd == "view 1") {
-			result = getTask3();
-		}else if (cmd == "view") {
-			result = getTask();
+	public static void initialise() {
+		try {
+			TaskieStorage.load("");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		System.out.println("received");
-		return result;
 	}
+	
+	public static String[][] execute(String str) {
+		TaskieAction action = TaskieParser.parse(str);
+		String[][] screen = takeAction(action);
+		return screen;
+	}
+	
+	private static String[][] takeAction(TaskieAction action) {
+		switch (action.getType()) {
+			case ADD:
+				return add(action.getTask());
+			case DELETE:
+//				return delete(action.getIndex());
+			default:
+				return add(action.getTask());
+		}
+	}
+	
+	public static String[] display(Collection<TaskieTask> taskList) {
+		String[] screen = new String[taskList.size()];
+		int index = 0;
+		for (TaskieTask task : taskList) {
+			screen[index++] = index + ". " + task.getTitle();
+		}
+		return screen;
+	}
+	
+	private static String[][] add(TaskieTask task) {
+		Collection<TaskieTask> taskList = TaskieStorage.addTask(task);
+		String[] tasks = display(taskList);
+		String[] feedback = new String[] {task.getTitle() + " is added"};
+		return new String[][] {tasks, feedback};
+	}
+/*	
+	private static Collection<TaskieTask> delete(int index) {
+		return TaskieStorage.deleteTask(index, );
+	}
+*/	
 }

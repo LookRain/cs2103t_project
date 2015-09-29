@@ -1,6 +1,8 @@
 package fancy4.taskie.view;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 //import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -30,7 +32,7 @@ public class TaskieOverviewController {
 	@FXML
 	private TextArea textOutput;
 	private MainApp mainApp;
-	
+
 
 
 	public TaskieOverviewController() {
@@ -39,28 +41,35 @@ public class TaskieOverviewController {
 
 	@FXML
 	private void initialize() {
-		/*for (int i = 0; i < 100; i++) {
-			if (i > 40) {
-				MainApp.refresh();
-			}
-		}*/
-		TaskieLogic.initialize();
+
+		TaskieLogic.initialise();
 		taskColumn.setCellValueFactory(new Callback<CellDataFeatures<String, String>, ObservableValue<String>>() {
 			public ObservableValue<String> call(CellDataFeatures<String, String> p) {
 				return new SimpleStringProperty(p.getValue());
 			}
 		});
 	}
-	
+
 	public void inputEnter(KeyEvent event) {
+		String input;
 		if (event.getCode() == KeyCode.ENTER) {
-			TaskieLogic.execute(textInput.getText());
+			ObservableList<String> taskData = FXCollections.observableArrayList();
+		
+			input = textInput.getText();
+			String[] d;
+			d = TaskieLogic.execute(input)[0];
+			//taskData.addAll(d);
+			mainTaskTable.getItems().removeAll(MainApp.taskData);
+			mainTaskTable.getItems().addAll(d);
+			
+			System.out.println(d.length);
+			
 			textInput.clear();
 		}
-		MainApp.taskData.removeAll();
+
 	}
-	
-	
+
+
 
 
 	public void setMainApp(MainApp mainApp) {
