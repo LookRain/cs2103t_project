@@ -55,7 +55,9 @@ public class TaskieOverviewController {
 	public void inputEnter(KeyEvent event) {
 		if (event.getCode() == KeyCode.ENTER) {
 			TaskieLogic.execute(textInput.getText());
+			textInput.clear();
 		}
+		MainApp.taskData.removeAll();
 	}
 	
 	

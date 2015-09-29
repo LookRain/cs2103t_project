@@ -9,7 +9,13 @@ public class TaskieLogic {
 	}
 	
 	public static String[] getTask2() {
+	
 		String[] data = {"ordasdfer pizza","fiasdfnish PS3","fisdgewnish 5km","kiasdxzcll bill"};
+		return data;
+	}
+	
+	public static String[] getTask3() {
+		String[] data = {"pizza","fiasdfnish PS3","fisdgewnish 5km","kiasdxzcll bill"};
 		return data;
 	}
 	public static int getLen() {
@@ -19,7 +25,17 @@ public class TaskieLogic {
 	public static void initialize() {
 		
 	}
-	public static void execute(String cmd) {
+	public static String[] execute(String cmd) {
+		String[] result = {}; 
+		if (cmd == "view all") {
+			result = getTask2();
+		} else if (cmd == "view 1") {
+			result = getTask3();
+		}else if (cmd == "view") {
+			result = getTask();
+		}
 		
+		System.out.println("received");
+		return result;
 	}
 }

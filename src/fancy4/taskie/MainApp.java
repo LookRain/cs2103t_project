@@ -18,18 +18,20 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private static ObservableList<String> taskData = FXCollections.observableArrayList();
+    public static ObservableList<String> taskData = FXCollections.observableArrayList();
     
     public MainApp() {
-    	String[] data = TaskieLogic.getTask();
+    	String[] data = TaskieLogic.execute("view all");
     	taskData.addAll(data);
    
     }
     
     public static void refresh() {
-    	String[] data = TaskieLogic.getTask2();
+    	
+    	String[] data = TaskieLogic.execute("");
     	taskData.removeAll(taskData);
     	taskData.addAll(data);
+    	System.out.println("refresh");
     }
     
     public ObservableList<String> getTaskData() {
