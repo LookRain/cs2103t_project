@@ -45,3 +45,7 @@
 {"task":{"title":"e","type":2,"start-time":"30-09-2015 10:43","priority":4,"status":false,"description":""}}
 {"task":{"title":"delete 2","type":2,"start-time":"30-09-2015 10:44","priority":4,"status":false,"description":""}}
 {"task":{"title":"asdf","type":2,"start-time":"30-09-2015 10:44","priority":4,"status":false,"description":""}}
+{"task":{"title":"dummy line for testing","type":2,"start-time":"30-09-2015 10:51","priority":4,"status":false,"description":""}}
+{"task":{"title":"a","type":2,"start-time":"30-09-2015 10:51","priority":4,"status":false,"description":""}}
+{"task":{"title":"a","type":2,"start-time":"30-09-2015 10:51","priority":4,"status":false,"description":""}}
+{"task":{"title":"bv","type":2,"start-time":"30-09-2015 10:51","priority":4,"status":false,"description":""}}
