@@ -1,8 +1,6 @@
 package fancy4.taskie;
 
 import java.io.IOException;
-import java.util.Date;
-
 import fancy4.taskie.model.*;
 import fancy4.taskie.view.TaskieOverviewController;
 import javafx.application.Application;
@@ -18,18 +16,14 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    public static ObservableList<String> taskData = FXCollections.observableArrayList();
+    public ObservableList<String> taskData = FXCollections.observableArrayList();
+    public ObservableList<String> dTaskData = FXCollections.observableArrayList();
+    public ObservableList<String> fTaskData = FXCollections.observableArrayList();
     
     public static String[] data = {};
     public MainApp() {
     	//data = TaskieLogic.execute("add order a pizza")[0];
-    	TaskieLogic.initialise();
-    	String command = "add dummy line for testing";
-    	String[][] screen = TaskieLogic.execute(command);
-    	data = screen[0];
-    	System.out.println(data.length);
-    	taskData.addAll(data);
-   
+    	//TaskieLogic.initialise();
     }
     
    /* public static void refresh(String cmd) {
@@ -42,11 +36,17 @@ public class MainApp extends Application {
     public ObservableList<String> getTaskData() {
     	return taskData;
     }
+    public ObservableList<String> getDTaskData() {
+    	return dTaskData;
+    }
+    public ObservableList<String> getFTaskData() {
+    	return fTaskData;
+    }
     
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("AddressApp");
+        this.primaryStage.setTitle("Taskie");
 
         initRootLayout();
 
